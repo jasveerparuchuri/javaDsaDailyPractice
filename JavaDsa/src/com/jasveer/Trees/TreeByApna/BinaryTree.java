@@ -92,19 +92,28 @@ public class BinaryTree {
 
     public static void main(String[] args) {
         int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
+        int subNodes[] = {2,4,-1,-1,5,-1,-1};
         BinaryTree1 tree = new BinaryTree1();
+        Node subRoot = tree.buildTree(subNodes);
+        tree.idx = -1;
         Node root = tree.buildTree(nodes);
-        BinarytreeQuestions q  = new BinarytreeQuestions();
-//        preOrder(root);
-//        System.out.println();
-//        inOrder(root);
-//        System.out.println();
-//        postOrder(root);
-//        System.out.println();
-//        levelOrder(root);
-//        System.out.println(q.sumNodes(root,0));
-        System.out.println(q.diameter(root));
-        System.out.println(q.diameter2(root).dia);
 
+
+//        System.out.println(root.val);
+        BinarytreeQuestions q  = new BinarytreeQuestions();
+////        preOrder(root);
+////        System.out.println();
+////        inOrder(root);
+////        System.out.println();
+////        postOrder(root);
+////        System.out.println();
+//        levelOrder(root);
+////        System.out.println(q.sumNodes(root,0));
+//        System.out.println(q.diameter(root));
+//        System.out.println(q.diameter2(root).dia);
+//        System.out.println(q.subTree(root,subRoot));
+//            q.topView(root);
+//        q.kthLevelI(root,3,1);
+        System.out.println(q.lca2(root,4,3).val);
     }
 }
