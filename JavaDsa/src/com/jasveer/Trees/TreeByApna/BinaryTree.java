@@ -114,6 +114,8 @@ public class BinaryTree {
 //        System.out.println(q.subTree(root,subRoot));
 //            q.topView(root);
 //        q.kthLevelI(root,3,1);
-        System.out.println(q.lca2(root,4,3).val);
+//        System.out.println(q.lca2(root,4,3).val);
+//        System.out.println(q.minDis(root,4,6));
+        q.kAncestor(root,4,2);
     }
 }

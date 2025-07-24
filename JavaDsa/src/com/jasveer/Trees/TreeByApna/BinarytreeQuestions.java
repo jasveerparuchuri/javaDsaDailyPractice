@@ -198,4 +198,47 @@ public class BinarytreeQuestions {
         }
         return root;
     }
+
+    //minmum distance
+
+    public static int lcaDis(BinaryTree.Node node,int n){
+        if( node == null){
+            return -1;
+        }
+        if(node.val == n){
+            return 0;
+        }
+        int left = lcaDis(node.left,n);
+        int right = lcaDis(node.right,n);
+        if(left == -1 && right ==-1){
+            return -1;
+        } else if (left == -1 ) {
+            return right+1;
+        }else {
+            return left + 1;
+        }
+    }
+    public static int minDis(BinaryTree.Node node,int n1,int n2){
+        BinaryTree.Node  lca = lca2(node,n1,n2);
+        int left = lcaDis(lca,n1);
+        int right = lcaDis(lca ,n2);
+        return left +right;
+    }
+
+    public static int kAncestor(BinaryTree.Node node, int n, int k) {
+        if (node == null) return -1;
+        if (node.val == n) return 0;
+
+        int left = kAncestor(node.left, n, k);
+        int right = kAncestor(node.right, n, k);
+
+        if (left == -1 && right == -1) return -1;
+
+        int max = Math.max(left, right);
+        if (max + 1 == k) {
+            System.out.println("K-th ancestor is: " + node.val);
+        }
+
+        return max + 1;
+    }
 }
