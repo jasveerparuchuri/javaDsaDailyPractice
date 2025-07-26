@@ -36,88 +36,99 @@ public class Bst {
         inorder(root.right);
     }
 
-    static class Ques{
-        public static  boolean searchBst(Node root,int k){
-            if(root == null){
+    static class Ques {
+        public static boolean searchBst(Node root, int k) {
+            if (root == null) {
                 return false;
             }
-            if(root.val == k){
+            if (root.val == k) {
                 return true;
-            }else if(root.val > k){
-                return  searchBst(root.left,k);
-            }else{
-                return searchBst(root.right,k);
+            } else if (root.val > k) {
+                return searchBst(root.left, k);
+            } else {
+                return searchBst(root.right, k);
             }
 
         }
+
         // deleteing node
-        public static Node deleteNode(Node root,int val){
-            if(root == null){
-                return  null;
+        public static Node deleteNode(Node root, int val) {
+            if (root == null) {
+                return null;
             }
-            if(root.val > val){
-                root.left = deleteNode(root.left,val);
+            if (root.val > val) {
+                root.left = deleteNode(root.left, val);
             } else if (root.val < val) {
-                root.right = deleteNode(root.right,val);
-            }else{
+                root.right = deleteNode(root.right, val);
+            } else {
                 // case1
-                if(root.left == null && root.right == null){
+                if (root.left == null && root.right == null) {
                     return null;
                 }
                 // case 2
-                if(root.right == null){
+                if (root.right == null) {
                     return root.left;
-                }
-                else if(root.left == null){
+                } else if (root.left == null) {
                     return root.right;
                 }
 
                 // case 3
                 Node is = findInSuccessor(root.right);
                 root.val = is.val;
-                return root.right = deleteNode(root.right,val);
+                return root.right = deleteNode(root.right, val);
 
             }
             return root;
         }
-        public static Node findInSuccessor(Node node){
-            if(node.left == null){
+
+        public static Node findInSuccessor(Node node) {
+            if (node.left == null) {
                 return node;
             }
             return findInSuccessor(node.left);
         }
+
         //print in range
-        public static void printInRange(Node root, int f,int l){
-            if(root == null){
+        public static void printInRange(Node root, int f, int l) {
+            if (root == null) {
                 return;
             }
-            if((root.val >= f) && root.val <= l){
-                printInRange(root.left,f,l);
-                System.out.print(root.val+" ");
-                printInRange(root.right,f,l);
+            if ((root.val >= f) && root.val <= l) {
+                printInRange(root.left, f, l);
+                System.out.print(root.val + " ");
+                printInRange(root.right, f, l);
 
-            }else if (root.val < f){
-                printInRange(root.left,f,l);
-            }else{
-                printInRange(root.right,f,l);
+            } else if (root.val < f) {
+                printInRange(root.left, f, l);
+            } else {
+                printInRange(root.right, f, l);
             }
         }
-        public static void printRootToLeaf(Node root, ArrayList<Integer> arr){
-            if(root == null){
+
+        public static void printRootToLeaf(Node root, ArrayList<Integer> arr) {
+            if (root == null) {
                 return;
             }
             arr.add(root.val);
-            if(root.left == null && root.right == null){
+            if (root.left == null && root.right == null) {
                 System.out.println(arr.toString());
-//                printPath(arr);
+
             }
-            printRootToLeaf(root.left,arr);
-            printRootToLeaf(root.right,arr);
-            arr.remove(arr.size()-1);
+            printRootToLeaf(root.left, arr);
+            printRootToLeaf(root.right, arr);
+            arr.remove(arr.size() - 1);
+        }public static boolean isValidBst(Node root,Node min,Node max){
+            if(root == null){
+                return  true;
+            }
+            if(min != null && min.val <= root.val){
+                return false;
+            } else if (max != null && max.val >= root.val) {
+                return  false;
+            }
+            return isValidBst(root.left,root,max) && isValidBst(root.right,min,root);
         }
-//        public static void printPath(ArrayList<Integer> arr){
-//            sout
-//        }
+
     }
 
     public static void main(String[] args) {
@@ -135,7 +146,8 @@ public class Bst {
 //        inorder(root);
 //        System.out.println();
 //        Ques.printInRange(root,1,5);
-        Ques.printRootToLeaf(root,new ArrayList<>());
+//        Ques.printRootToLeaf(root,new ArrayList<>());
+        System.out.println(Ques.isValidBst(root,null,null));
 
     }
 
