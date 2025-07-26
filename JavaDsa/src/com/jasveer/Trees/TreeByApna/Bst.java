@@ -117,7 +117,9 @@ public class Bst {
             printRootToLeaf(root.left, arr);
             printRootToLeaf(root.right, arr);
             arr.remove(arr.size() - 1);
-        }public static boolean isValidBst(Node root,Node min,Node max){
+        }
+        // check wheather  give binary tree is Valid
+        public static boolean isValidBst(Node root,Node min,Node max){
             if(root == null){
                 return  true;
             }
@@ -127,6 +129,30 @@ public class Bst {
                 return  false;
             }
             return isValidBst(root.left,root,max) && isValidBst(root.right,min,root);
+        }
+        // create mirror of given binary tree
+        public static Node mirrorBst(Node root){
+            if(root == null){
+                return null;
+            }
+            Node left = mirrorBst(root.left);
+            Node right = mirrorBst(root.right);
+
+            root.left = right;
+            root.right = left;
+            return root;
+        }
+
+        // convert sorted ArrayOfNode to BinarySearch Tree
+        public static Node sortToBst(int[] arr,int start,int end){
+            if(start > end){
+                return  null;
+            }
+            int mid  = start+(end-start)/2;
+            Node root = new Node(arr[mid]);
+            root.left = sortToBst(arr,start,mid-1);
+            root.right = sortToBst(arr,mid+1,end);
+            return root;
         }
 
     }
@@ -147,7 +173,15 @@ public class Bst {
 //        System.out.println();
 //        Ques.printInRange(root,1,5);
 //        Ques.printRootToLeaf(root,new ArrayList<>());
-        System.out.println(Ques.isValidBst(root,null,null));
+//        System.out.println(Ques.isValidBst(root,null,null));
+//        inorder(root);
+//        System.out.println("before mirror");
+//        Node root1 = Ques.mirrorBst(root);
+//        System.out.println(" After mirror");
+//        inorder(root1);
+        int[] arr = {3,6,5,8,10,11,12};
+        Node root2 = Ques.sortToBst(arr,0,arr.length-1);
+        inorder(root2);
 
     }
 
