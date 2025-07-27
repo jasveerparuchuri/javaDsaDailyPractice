@@ -2,6 +2,8 @@ package com.jasveer.OOPS;
 
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CustomGenArraylist<T> {
     private Object[] data;
@@ -64,5 +66,7 @@ public class CustomGenArraylist<T> {
     public static void main(String[] args) {
         CustomGenArraylist<Integer> list = new CustomGenArraylist<>();
         list.add(9);
+        
     }
+
 }

@@ -2,6 +2,8 @@ package com.jasveer.Trees.TreeByApna;
 
 import java.util.ArrayList;
 
+import static com.jasveer.Trees.TreeByApna.BinaryTree.preOrder;
+
 public class Bst {
     static class Node{
         Node left;
@@ -179,12 +181,21 @@ public class Bst {
 //        Node root1 = Ques.mirrorBst(root);
 //        System.out.println(" After mirror");
 //        inorder(root1);
-        int[] arr = {3,6,5,8,10,11,12};
+        int[] arr = {3,5,6,8,10,11,12};
         Node root2 = Ques.sortToBst(arr,0,arr.length-1);
-        inorder(root2);
+//        inorder(root2);
+        preOrder(root2);
 
     }
 
+    private static void preOrder(Node root) {
+        if(root == null){
+            return ;
+        }
+        System.out.print(root.val+" ");
+        preOrder(root.left);
+        preOrder(root.right);
+    }
 
 
 }
