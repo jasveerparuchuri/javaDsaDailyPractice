@@ -101,7 +101,7 @@ public class Graphs {
             return true;
         }
         vis[src] =true;
-        for(int i = 0;i<graph[2].size();i++)
+        for(int i = 0;i<graph[src].size();i++)
         {
             Edge e = graph[src].get(i);
             if(!vis[e.des] && hasPath(graph, e.des, des, vis)){
