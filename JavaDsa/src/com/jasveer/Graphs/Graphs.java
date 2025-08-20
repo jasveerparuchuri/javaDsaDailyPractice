@@ -1,8 +1,9 @@
-package com.jasveer.Graph;
+package com.jasveer.Graphs;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+
 
 public class Graphs {
 
@@ -110,4 +111,5 @@ public class Graphs {
         }
         return false;
     }
+
 }
