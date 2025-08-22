@@ -59,6 +59,7 @@ public class ConnectedComponentsGraph {
         // DFS for connected components
         System.out.println("\nConnected Components:");
         dfs(graph);
+        System.out.println(detectCycle(graph));
     }
 
     // Traverse all components
@@ -117,5 +118,73 @@ public class ConnectedComponentsGraph {
             }
         }
     }
+
+    public static boolean detectCycle(ArrayList<Graph.Edge>[] graph) {
+        boolean[] visited = new boolean[graph.length];
+
+        for (int i = 0; i < graph.length; i++) {
+            if (!visited[i]) {
+                if (detectCycleUtil(graph, visited, i, -1)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean detectCycleUtil(ArrayList<Graph.Edge>[] graph, boolean[] visited, int curr, int parent) {
+        visited[curr] = true;
+
+        for (int j = 0; j < graph[curr].size(); j++) {
+            Graph.Edge e = graph[curr].get(j);
+
+            // If neighbor not visited, recurse
+            if (!visited[e.des]) {
+                if (detectCycleUtil(graph, visited, e.des, curr)) {
+                    return true;
+                }
+            }
+            // If neighbor is visited and not parent → cycle found
+            else if (e.des != parent) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    public static boolean isBipartite(ArrayList<Graph.Edge>[] graph) {
+        int[] col = new int[graph.length];
+        for (int i = 0; i < graph.length; i++) {
+            col[i] = -1; // no color
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i = 0; i < graph.length; i++) {
+            if (col[i] == -1) { // not colored yet
+                q.add(i);
+                col[i] = 0; // start with color 0
+
+                while (!q.isEmpty()) {
+                    int curr = q.remove();
+
+                    for (int j = 0; j < graph[curr].size(); j++) {
+                        Graph.Edge e = graph[curr].get(j);
+
+                        if (col[e.des] == -1) { // not visited
+                            int nextCol = (col[curr] == 0) ? 1 : 0;
+                            col[e.des] = nextCol;
+                            q.add(e.des);
+                        } else if (col[e.des] == col[curr]) {
+                            // same color as current → not bipartite
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
 
 }
