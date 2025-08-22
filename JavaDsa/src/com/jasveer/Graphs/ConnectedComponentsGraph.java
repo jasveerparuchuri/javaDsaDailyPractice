@@ -1,6 +1,8 @@
 package com.jasveer.Graphs;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ConnectedComponentsGraph {
     static class Graph {
@@ -79,6 +81,39 @@ public class ConnectedComponentsGraph {
         for (Graph.Edge e : graph[curr]) {
             if (!visited[e.des]) {
                 dfsUtil(graph, e.des, visited);
+            }
+        }
+    }
+
+    // Bfs
+    public static void bfs(ArrayList<Graph.Edge>[] graph) {
+        boolean[] visited = new boolean[graph.length];
+        for (int i = 0; i < graph.length; i++) {
+            if (!visited[i]) {
+                System.out.print("Component: ");
+                bfsUtil(graph, visited, i);
+                System.out.println();
+            }
+        }
+    }
+
+    // BFS starting from "start"
+    public static void bfsUtil(ArrayList<Graph.Edge>[] graph, boolean[] visited, int start) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(start);
+
+        while (!q.isEmpty()) {
+            int curr = q.remove();
+
+            if (!visited[curr]) {
+                System.out.print(curr + " ");
+                visited[curr] = true;
+
+                for (Graph.Edge e : graph[curr]) {
+                    if (!visited[e.des]) {
+                        q.add(e.des);
+                    }
+                }
             }
         }
     }
