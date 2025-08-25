@@ -59,7 +59,8 @@ public class ConnectedComponentsGraph {
         // DFS for connected components
         System.out.println("\nConnected Components:");
         dfs(graph);
-        System.out.println(detectCycle(graph));
+//        System.out.println(detectCycle(graph));
+        System.out.println(isCycle(graph));
     }
 
     // Traverse all components
@@ -186,5 +187,35 @@ public class ConnectedComponentsGraph {
         return true;
     }
 
+    public static boolean isCycle(ArrayList<Graph.Edge>[] graph)
+    {
+        boolean[] visted = new boolean[graph.length];
+        boolean[] stack = new boolean[graph.length];
+        for(int i = 0;i <graph.length;i++) {
+            if (!visted[i]) {
+                if (isCycleUtil(graph, i, visted, stack)) {
+                    return true;
+                }
+            }
+        }
+        return  false;
+    }
+    public static boolean isCycleUtil(ArrayList<Graph.Edge>[] graph,int curr,boolean[] vis,boolean[] stack){
+        vis[curr] = true;
+        stack[curr]= true;
+        for(int i = 0;i<graph[curr].size();i++)
+        {
+            Graph.Edge  e = graph[curr].get(i);
+            if(stack[e.des]){
+                return true;
+            }
+            if(!vis[e.des] && isCycleUtil(graph, e.des, vis, stack)){
+                return true;
+            }
+        }
+        stack[curr] = false;
+        return false;
+
+    }
 
 }
