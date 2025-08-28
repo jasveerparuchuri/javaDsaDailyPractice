@@ -3,6 +3,7 @@ package com.jasveer.Graphs;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class ConnectedComponentsGraph {
     static class Graph {
@@ -216,6 +217,30 @@ public class ConnectedComponentsGraph {
         stack[curr] = false;
         return false;
 
+    }
+    public void topSort(ArrayList<Graph.Edge>[] graph){
+        Stack<Integer> s = new Stack<>();
+        boolean[] vis = new boolean[graph.length];
+        for (int i = 0; i < graph.length; i++) {
+            if(!vis[i]){
+                topSortUtil(graph,i,s,vis);
+            }
+        }
+        while(!s.isEmpty()){
+            System.out.println(s.pop()+" ");
+        }
+    }
+
+    public void topSortUtil(ArrayList<Graph.Edge>[] graph,int curr,Stack<Integer> s,boolean[] vis){
+        vis[curr] = true;
+        for(int i = 0;i<graph[curr].size();i++){
+            Graph.Edge e = graph[curr].get(i);
+
+            if(!vis[e.des]){
+                topSortUtil(graph, e.des, s, vis);
+            }
+        }
+        s.push(curr);
     }
 
 }
