@@ -218,7 +218,7 @@ public class ConnectedComponentsGraph {
         return false;
 
     }
-    public void topSort(ArrayList<Graph.Edge>[] graph){
+    public static  void topSort(ArrayList<Graph.Edge>[] graph){
         Stack<Integer> s = new Stack<>();
         boolean[] vis = new boolean[graph.length];
         for (int i = 0; i < graph.length; i++) {
@@ -231,7 +231,8 @@ public class ConnectedComponentsGraph {
         }
     }
 
-    public void topSortUtil(ArrayList<Graph.Edge>[] graph,int curr,Stack<Integer> s,boolean[] vis){
+    // DAG(directed acyclic graph)  is  required fot topological
+    public static  void topSortUtil(ArrayList<Graph.Edge>[] graph,int curr,Stack<Integer> s,boolean[] vis){
         vis[curr] = true;
         for(int i = 0;i<graph[curr].size();i++){
             Graph.Edge e = graph[curr].get(i);
@@ -241,6 +242,48 @@ public class ConnectedComponentsGraph {
             }
         }
         s.push(curr);
+    }
+
+
+    // Khan's Algo
+    public static void calInDeg(ArrayList<Graph.Edge>[] graph,int[] indeg)
+    {
+        for(int i = 0;i< graph.length;i++)
+        {
+            for(int j = 0;j<graph[i].size();i++)
+            {
+                Graph.Edge e = graph[i].get(j);
+                indeg[e.des]++;
+            }
+        }
+    }
+    public static  void topSortBfs(ArrayList<Graph.Edge>[] graph)
+    {
+        int indeg[] = new int[graph.length];
+        calInDeg(graph,indeg);
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0;i< graph.length;i++)
+        {
+            if(indeg[i] == 0)
+            {
+                q.add(i);
+            }
+        }
+
+        while(!q.isEmpty())
+        {
+            int curr = q.remove();
+            System.out.println(curr+" ");
+            for(int i = 0;i<graph[curr].size();i++)
+            {
+                Graph.Edge e = graph[curr].get(i);
+                indeg[e.des]--;
+                if(indeg[e.des] == 0)
+                {
+                    q.add(e.des);
+                }
+            }
+        }
     }
 
 }
