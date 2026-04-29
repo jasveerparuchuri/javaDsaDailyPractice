@@ -84,12 +84,23 @@ public class BinaryTreeCreation {
         }
     }
 
+    public int maxDepth(Node root){
+        if(root == null){
+            return 0;
+        }
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+        return Math.max(left,right)+1;
+    }
+
     public static void main(String[] args) {
         BinaryTreeCreation binaryTreeCreation = new BinaryTreeCreation();
-        int[] nodes = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
+        int[] nodes = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
         Node root = binaryTreeCreation.buildTree(nodes);
 //            binaryTreeCreation.preOrder(root);
-            binaryTreeCreation.levelOrder(root);
+//            binaryTreeCreation.levelOrder(root);
+        System.out.println(binaryTreeCreation.maxDepth(root));
 
     }
+
 }
