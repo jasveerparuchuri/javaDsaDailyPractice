@@ -272,12 +272,12 @@ public class Sudoku extends JFrame {
             }
             if (isCorrectSolution(board)) {
                 stopTimer();
-                JOptionPane.showMessageDialog(this, "Congratulations! Sudoku is correct.");
+                JOptionPane.showMessageDialog(this, "Congratulations Sudoku is correct.");
             } else {
                 JOptionPane.showMessageDialog(this, "Incorrect solution. Try again.");
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Only numbers 1–9 allowed!");
+            JOptionPane.showMessageDialog(this, "Only numbers 1–9 allowed");
         }
     }
 

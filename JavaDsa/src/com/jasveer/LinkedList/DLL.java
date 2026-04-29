@@ -1,6 +1,6 @@
 package com.jasveer.LinkedList;
 
-public class DLL {
+public class           DLL {
      Node head;
 
      public void insertFirst(int val){

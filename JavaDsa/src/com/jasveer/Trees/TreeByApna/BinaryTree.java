@@ -97,6 +97,8 @@ public class BinaryTree {
         Node subRoot = tree.buildTree(subNodes);
         tree.idx = -1;
         Node root = tree.buildTree(nodes);
+        BinaryTree.levelOrder(root);
+
 
 
 //        System.out.println(root.val);
@@ -116,6 +118,7 @@ public class BinaryTree {
 //        q.kthLevelI(root,3,1);
 //        System.out.println(q.lca2(root,4,3).val);
 //        System.out.println(q.minDis(root,4,6));
-        q.kAncestor(root,4,2);
+//        q.kAncestor(root,4,2);
+
     }
 }
